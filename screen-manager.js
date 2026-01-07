@@ -23,7 +23,7 @@ const ScreenManager = (() => {
     imsak: 'Imsak',
     shubuh: 'Shubuh',
     syuruq: 'Syuruq',
-    dzuhur: 'Dzuhur/Jumat',
+    dzuhur: 'Dzuhur',
     ashar: 'Ashar',
     maghrib: 'Maghrib',
     isya: 'Isya'
@@ -314,7 +314,7 @@ const ScreenManager = (() => {
                     style="top:10px; right:10px" onclick="ScreenManager.closeAllForms()">
             </button>
             
-            <h4 class="mb-4 text-center">⏻ Pengaturan Screen Per Waktu</h4>
+            <h4 class="mb-4 text-center">Pengaturan Screen Per Waktu</h4>
             
             <div class="row g-2 mb-4">
               ${Object.keys(PRAYER_NAMES).map(prayer => `
@@ -359,7 +359,7 @@ const ScreenManager = (() => {
                     style="top:10px; right:10px" onclick="ScreenManager.openMainForm()">
             </button>
             
-            <h4 class="mb-3 text-center">⏻ ${PRAYER_NAMES[prayer]}</h4>
+            <h4 class="mb-3 text-center">${PRAYER_NAMES[prayer]}</h4>
             
             <!-- Checkbox Aktifkan -->
             <div class="form-check form-switch mb-4">
@@ -620,3 +620,4 @@ if (document.readyState === 'loading') {
 } else {
   ScreenManager.init();
 }
+
