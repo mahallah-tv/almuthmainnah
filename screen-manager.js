@@ -117,7 +117,7 @@ const ScreenManager = (() => {
     if (screenActive) return;
     
     screenActive = true;
-    console.log('🖥️ Screen OFF activated');
+    //console.log('🖥️ Screen OFF activated');
     
     // Tampilkan overlay hitam
     const sb = document.getElementById("screenblack");
@@ -136,7 +136,7 @@ const ScreenManager = (() => {
     if (!screenActive) return;
     
     screenActive = false;
-    console.log('🖥️ Screen ON activated');
+    //console.log('🖥️ Screen ON activated');
     
     // Sembunyikan overlay hitam
     const sb = document.getElementById("screenblack");
@@ -273,18 +273,18 @@ const ScreenManager = (() => {
       if (!times) continue;
 
       // Debug log
-      console.log(`[${prayer}] ON: ${times.screenOnTime}, OFF: ${times.screenOffTime}, Now: ${currentTimeStr}`);
+      //console.log(`[${prayer}] ON: ${times.screenOnTime}, OFF: ${times.screenOffTime}, Now: ${currentTimeStr}`);
 
       // Cek jika waktunya untuk Screen ON
       if (times.screenOnTime && currentTimeStr === times.screenOnTime && screenActive) {
-        console.log(`🟢 Screen ON triggered for ${prayer}`);
+        //console.log(`🟢 Screen ON triggered for ${prayer}`);
         hideScreenBlack();
         break;
       }
 
       // Cek jika waktunya untuk Screen OFF
       if (times.screenOffTime && currentTimeStr === times.screenOffTime && !screenActive) {
-        console.log(`🔴 Screen OFF triggered for ${prayer}`);
+        //console.log(`🔴 Screen OFF triggered for ${prayer}`);
         showScreenBlack();
         break;
       }
@@ -298,7 +298,7 @@ const ScreenManager = (() => {
       checkScreenTimes();
     }, 30000); // Cek setiap 30 detik
     
-    console.log('🕐 Screen time watcher started');
+    //console.log('🕐 Screen time watcher started');
   }
 
   /* ===============================
@@ -579,7 +579,7 @@ const ScreenManager = (() => {
         screenblack.onclick = forceOn;
       }
       
-      console.log('🖥️ Screen Manager initialized');
+      //console.log('🖥️ Screen Manager initialized');
     },
     
     // UI Functions
@@ -620,4 +620,3 @@ if (document.readyState === 'loading') {
 } else {
   ScreenManager.init();
 }
-
