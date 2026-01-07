@@ -669,11 +669,210 @@
         box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
     }
 
+/* Popup Selamat Datang - Small Version */
+#welcomePopup button:hover {
+  opacity: 0.9;
+}
 
+#welcomePopup button:active {
+  transform: scale(0.98);
+}
+
+/* Animasi untuk popup */
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#welcomePopup > div {
+  animation: popupSlideIn 0.3s ease-out;
+}
 
   </style>
 </head>
 <body>
+
+<!-- Popup Selamat Datang (Small Version) -->
+<div id="welcomePopup" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+  padding: 15px;
+">
+  <div style="
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--theme-primary);
+    text-align: center;
+  ">
+    <!-- Logo atau Icon -->
+    <div style="
+      width: 60px;
+      height: 60px;
+      background: var(--theme-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px auto;
+    ">
+      <i class="bi bi-music-note-beamed" style="font-size: 28px; color: white;"></i>
+    </div>
+    
+    <!-- Judul -->
+    <h3 style="
+      color: var(--theme-primary);
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    ">
+      Selamat Datang
+    </h3>
+    
+    <!-- Nama Masjid -->
+    <p id="welcomeMasjidName" style="
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    "></p>
+    
+    <!-- Alamat -->
+    <p id="welcomeMasjidAddress" style="
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 15px;
+    "></p>
+    
+    <!-- Pesan -->
+    <div style="
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 13px;
+      line-height: 1.4;
+    ">
+      <i class="bi bi-info-circle" style="color: var(--theme-primary); margin-right: 5px;"></i>
+      <span>Klik tombol di bawah untuk mengaktifkan audio adzan, shalawat, dan notifikasi.</span>
+    </div>
+    
+    <!-- Tombol Utama -->
+    <button onclick="activateAudio()" style="
+      background: var(--theme-primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      width: 100%;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    ">
+      <i class="bi bi-volume-up" style="margin-right: 8px;"></i>
+      AKTIFKAN AUDIO
+    </button>
+    
+    <!-- Timer Auto Close -->
+    <div style="
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 15px;
+      padding: 8px;
+      background: #fff3cd;
+      border-radius: 6px;
+      border-left: 3px solid #ffc107;
+    ">
+      <i class="bi bi-clock" style="margin-right: 5px;"></i>
+      Popup akan menutup dalam 
+      <span id="autoCloseTimer" style="font-weight: bold; color: var(--theme-primary);">30</span> 
+      detik
+    </div>
+    
+    <!-- Tombol Kecil -->
+    <div style="display: flex; gap: 8px; margin-top: 10px;">
+      <button onclick="skipAudioActivation()" style="
+        flex: 1;
+        background: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 12px;
+        cursor: pointer;
+      ">
+        <i class="bi bi-skip-forward" style="margin-right: 5px;"></i>
+        Lewati
+      </button>
+      
+      <button onclick="activateAudio()" style="
+        flex: 1;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 12px;
+        cursor: pointer;
+      ">
+        <i class="bi bi-check-lg" style="margin-right: 5px;"></i>
+        OK
+      </button>
+    </div>
+    
+    <!-- Checkbox -->
+    <div style="
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+      text-align: left;
+    ">
+      <label style="font-size: 12px; color: #666; display: flex; align-items: center; cursor: pointer;">
+        <input type="checkbox" id="dontShowAgain" style="margin-right: 8px;">
+        Jangan tampilkan lagi
+      </label>
+    </div>
+    
+    <!-- Close Button -->
+    <button onclick="skipAudioActivation()" style="
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">
+      ×
+    </button>
+  </div>
+</div>
 
 <div id="screenblack"></div>
 
@@ -4070,7 +4269,173 @@ function applyPrayerOffsets() {
   updatePrayerTimesUI();
 }
 
+// ==================== POPUP SELAMAT DATANG - SIMPLE VERSION ====================
 
+var audioActivated = false;
+var welcomePopupTimer = null;
+var autoCloseTime = 30; // detik
+
+function showWelcomePopup() {
+  // Cek apakah sudah pernah menampilkan popup
+  var dontShowAgain = localStorage.getItem('dontShowWelcomePopup');
+  if (dontShowAgain === 'true') {
+    return;
+  }
+  
+  // Cek apakah audio sudah diaktifkan
+  if (audioActivated) {
+    return;
+  }
+  
+  // Update informasi masjid di popup
+  document.getElementById('welcomeMasjidName').textContent = settings.masjidName;
+  document.getElementById('welcomeMasjidAddress').textContent = settings.masjidAddress;
+  
+  // Tampilkan popup
+  document.getElementById('welcomePopup').style.display = 'flex';
+  
+  // Start timer auto close
+  startAutoCloseTimer();
+}
+
+function startAutoCloseTimer() {
+  var timerElement = document.getElementById('autoCloseTimer');
+  if (!timerElement) return;
+  
+  var timeLeft = autoCloseTime;
+  timerElement.textContent = timeLeft;
+  
+  welcomePopupTimer = setInterval(function() {
+    timeLeft--;
+    timerElement.textContent = timeLeft;
+    
+    if (timeLeft <= 0) {
+      clearInterval(welcomePopupTimer);
+      skipAudioActivation();
+    }
+  }, 1000);
+}
+
+function activateAudio() {
+  try {
+    // Hentikan timer auto close
+    if (welcomePopupTimer) {
+      clearInterval(welcomePopupTimer);
+    }
+    
+    // Coba mainkan audio test
+    var audioTest = document.getElementById('audioBeep');
+    if (audioTest) {
+      audioTest.volume = 0.3;
+      audioTest.play()
+        .then(function() {
+          // Audio berhasil diaktifkan
+          audioActivated = true;
+          localStorage.setItem('audioActivated', 'true');
+          
+          // Pause setelah 0.5 detik
+          setTimeout(function() {
+            audioTest.pause();
+            audioTest.currentTime = 0;
+          }, 500);
+          
+          // Tutup popup
+          closeWelcomePopup();
+          
+          // Tampilkan notifikasi sukses kecil
+          showSmallNotification('🎵 Audio diaktifkan');
+        })
+        .catch(function(e) {
+          console.log('Gagal mengaktifkan audio:', e);
+          showSmallNotification('❌ Gagal mengaktifkan audio');
+        });
+    }
+  } catch (e) {
+    console.log('Error activateAudio:', e);
+  }
+}
+
+function skipAudioActivation() {
+  // Hentikan timer auto close
+  if (welcomePopupTimer) {
+    clearInterval(welcomePopupTimer);
+  }
+  
+  // Cek checkbox "Jangan tampilkan lagi"
+  var dontShowCheckbox = document.getElementById('dontShowAgain');
+  if (dontShowCheckbox && dontShowCheckbox.checked) {
+    localStorage.setItem('dontShowWelcomePopup', 'true');
+  }
+  
+  // Tutup popup
+  closeWelcomePopup();
+  
+  showSmallNotification('🔇 Audio tidak diaktifkan');
+}
+
+function closeWelcomePopup() {
+  document.getElementById('welcomePopup').style.display = 'none';
+  
+  // Reset timer jika masih ada
+  if (welcomePopupTimer) {
+    clearInterval(welcomePopupTimer);
+    welcomePopupTimer = null;
+  }
+}
+
+// Notifikasi kecil untuk popup
+function showSmallNotification(message) {
+  var notif = document.createElement('div');
+  notif.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--theme-primary);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 13px;
+    z-index: 20001;
+    animation: slideInRight 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  `;
+  notif.textContent = message;
+  document.body.appendChild(notif);
+  
+  setTimeout(function() {
+    if (notif.parentNode) {
+      notif.style.opacity = '0';
+      notif.style.transform = 'translateX(20px)';
+      setTimeout(function() {
+        if (notif.parentNode) {
+          notif.parentNode.removeChild(notif);
+        }
+      }, 300);
+    }
+  }, 2000);
+}
+
+// Fungsi untuk manual membuka popup (testing)
+function showWelcomePopupManual() {
+  // Reset preferensi
+  localStorage.removeItem('dontShowWelcomePopup');
+  localStorage.removeItem('audioActivated');
+  audioActivated = false;
+  showWelcomePopup();
+}
+
+// Cek status audio saat aplikasi dimuat
+function checkAudioStatus() {
+  var audioActivatedSaved = localStorage.getItem('audioActivated');
+  if (audioActivatedSaved === 'true') {
+    audioActivated = true;
+  }
+  
+  var dontShowPopup = localStorage.getItem('dontShowWelcomePopup');
+  if (dontShowPopup === 'true') {
+    // Popup tidak akan ditampilkan
+  }
+}
 
 // ==================== INTEGRASI SCREEN MANAGER ====================
 // Pastikan screen manager tidak mengganggu fungsi utama
@@ -4081,6 +4446,9 @@ window.onload = function() {
     
     // Deteksi STB
     isSTB = navigator.userAgent.toLowerCase().includes('stb') || !('ontouchstart' in window);
+
+    // Cek status audio
+    checkAudioStatus();
 
     // Cek dan update tampilan Jumat
     updateJumatDisplay();
@@ -4114,6 +4482,13 @@ window.onload = function() {
     
     // Update Jumat display setiap menit (untuk handle pergantian hari)
     setInterval(updateJumatDisplay, 60000);
+
+    // Tampilkan popup welcome setelah 1 detik (jika audio belum diaktifkan)
+    setTimeout(function() {
+      if (!audioActivated) {
+        showWelcomePopup();
+      }
+    }, 1000);
     
     // Periksa apakah screen manager sudah dimuat
     if (typeof screenManager !== 'undefined' && screenManager) {
